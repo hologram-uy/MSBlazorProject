@@ -1,0 +1,2 @@
+# MSBlazorProject
+MSFullStackProject - Blazor activity
