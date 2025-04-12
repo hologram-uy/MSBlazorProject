@@ -1,5 +1,6 @@
 ﻿@page "/register"
 @inject NavigationManager Navigation
+@inject UserSessionService Session
 
 <div class="container">
     <h2>Registro al Evento</h2>
@@ -36,5 +37,6 @@
     private void HandleValidSubmit()
     {
         submitted = true;
+        Session.SetUser(registration.Name); 
     }
 }
