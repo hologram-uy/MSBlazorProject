@@ -1,0 +1,16 @@
+﻿@page "/attendance"
+@inject UserSessionService Session
+
+<div class="container">
+    <h2>Asistencia</h2>
+
+    @if (Session.IsLoggedIn)
+    {
+        <p><strong>Usuario registrado:</strong> @Session.UserName</p>
+        <p>Gracias por asistir al evento 🎊</p>
+    }
+    else
+    {
+        <p>No hay usuario registrado. <a href="/register" class="btn btn-primary">Registrarse</a></p>
+    }
+</div>

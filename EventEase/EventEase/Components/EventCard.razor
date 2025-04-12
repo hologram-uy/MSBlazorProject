@@ -1,0 +1,29 @@
+﻿@using EventEase.Models
+@inherits LayoutComponentBase
+
+@if (IsValidEvent(Event))
+{
+    <div class="card m-3 p-3 border shadow-sm">
+        <h3>@Event.Name</h3>
+        <p><strong>Fecha:</strong> @Event.Date.ToShortDateString()</p>
+        <p><strong>Ubicación:</strong> @Event.Location</p>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning m-3">
+        Información del evento no válida.
+    </div>
+}
+
+@code {
+    [Parameter]
+    public EventModel Event { get; set; } = new EventModel();
+
+    private bool IsValidEvent(EventModel evt)
+    {
+        return !string.IsNullOrWhiteSpace(evt.Name)
+            && !string.IsNullOrWhiteSpace(evt.Location)
+            && evt.Date > DateTime.MinValue;
+    }
+}

@@ -1,0 +1,35 @@
+﻿@page "/"
+
+@using EventEase.Models
+@using EventEase.Components
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+
+<div class="container">
+    <h2>Lista de Eventos</h2>
+
+    <Virtualize Items="@Events" Context="evt">
+        <div class="card p-3 mb-3 border shadow-sm">
+            <EventCard Event="evt" />
+            <a href="/eventdetails/@Events.IndexOf(evt)" class="btn btn-primary mt-2">Ver detalles</a>
+        </div>
+    </Virtualize>
+    <a href="/">Volver</a>
+</div>
+
+@code {
+    private List<EventModel> Events = new();
+
+    protected override void OnInitialized()
+    {
+        // Simulamos una lista grande
+        for (int i = 0; i < 10; i++)
+        {
+            Events.Add(new EventModel
+                {
+                    Name = $"Evento #{i + 1}",
+                    Date = DateTime.Now.AddDays(i),
+                    Location = $"Ciudad #{i + 1}"
+                });
+        }
+    }
+}

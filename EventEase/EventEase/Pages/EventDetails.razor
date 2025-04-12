@@ -1,0 +1,54 @@
+﻿@page "/eventdetails/{id:int}"
+@using EventEase.Models
+
+<div class="container">
+    <h2>Detalles del Evento</h2>
+
+    @if (Event != null)
+    {
+        <div class="card p-3 border shadow-sm">
+            <h3>@Event.Name</h3>
+            <p><strong>Fecha:</strong> @Event.Date.ToLongDateString()</p>
+            <p><strong>Ubicación:</strong> @Event.Location</p>
+            <a href="/register" class="btn btn-primary">Registrarse</a>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            Evento no encontrado.
+        </div>
+    }
+
+    <div style="margin-top:15px;">
+        <a href="/">Volver</a>
+    </div>
+    
+</div>
+
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+    public EventModel? Event;
+
+    private List<EventModel> mockEvents = new()
+    {
+        new EventModel { Name = "Tech Summit 2025", Date = new DateTime(2025, 6, 10), Location = "San Francisco" },
+        new EventModel { Name = "AI Conference", Date = new DateTime(2025, 8, 22), Location = "New York" },
+        new EventModel { Name = "Blazor Fest", Date = new DateTime(2025, 9, 15), Location = "Madrid" }
+    };
+
+    protected override void OnInitialized()
+    {
+        if (id >= 0 && id < mockEvents.Count)
+        {
+            Event = mockEvents[id];
+        }
+        else
+        {
+            Event = null;
+        }
+    }
+}
